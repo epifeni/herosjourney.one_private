@@ -1,11 +1,15 @@
 {
-    "$schema": "https://railway.app/railway.schema.json",
-    "build": {
-        "builder": "NIXPACKS"
-    },
-    "deploy": {
-        "startCommand": "python3 manage.py migrate && python3 manage.py collectstatic --noinput && gunicorn smartlearning.wsgi",
-        "restartPolicyType": "ON_FAILURE",
-        "restartPolicyMaxRetries": 10
+  "$schema": "https://railway.app/v1/schema.json",
+  "name": "smartlearning",
+  "build": {
+    "builder": "NIXPACKS"
+  },
+  "deploy": {
+    "numReplicas": 1,
+    "startCommand": "python3 manage.py migrate && python3 manage.py collectstatic --noinput && gunicorn smartlearning.wsgi",
+    "restartPolicy": {
+      "type": "on-failure",
+      "maxRetries": 10
     }
+  }
 }
