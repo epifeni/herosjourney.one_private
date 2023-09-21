@@ -35,7 +35,7 @@ SECRET_KEY = config('SECRET_KEY_2')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', cast=bool)
 
-ALLOWED_HOSTS = ['*' ,'sls.com', 'localhost', '127.0.0.1', '10.0.0.6', 'herosjourneyoneprivate-production.up.railway.app']
+ALLOWED_HOSTS = ['*']
 # ALLOWED_HOSTS = [ ]
 
 SITE_ID = 1
@@ -50,6 +50,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # 'whitenoise.runserver_nostatic', 
+
     'custom_accounts', # custom_users_accounts app
     'payments', # custom_payments app
     'base', # main django app
@@ -62,6 +64,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    # "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
