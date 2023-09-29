@@ -24,7 +24,7 @@
                 <div class="col-6">
                     <div class="gridarea__img"> 
                         {% comment %} img-thumbnail {% endcomment %}
-                        <img src="{{course.thumbnail.url}}" alt="grid" />
+                        <img src="{% static course.thumbnail.url %}" alt="grid" />
                         <div class="gridarea__small__button">
                           <div class="grid__badge">{{course.category}}</div>
                         </div>

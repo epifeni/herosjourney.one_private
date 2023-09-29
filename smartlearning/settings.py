@@ -30,13 +30,19 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('SECRET_KEY_2')
+SECRET_KEY = 'SECRET_KEY_2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', cast=bool)
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 # ALLOWED_HOSTS = [ ]
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://herosjourneyoneprivate-production.up.railway.app',
+    'https://herosjourney.one/',
+    'http://herosjourney.one/',
+]
 
 SITE_ID = 1
 
@@ -64,7 +70,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    # "whitenoise.middleware.WhiteNoiseMiddleware",
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -157,7 +163,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static/')
+    os.path.join(BASE_DIR, 'static')
 ]
 
 # STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
@@ -262,11 +268,9 @@ STRIPE_SECRET_KEY = config('STRIPE_SECRET_KEY')
 
 
 
-
-
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = config('EMAIL_HOST_USER_OK')
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD_OK')
+EMAIL_HOST_USER = 'EMAIL_HOST_USER_OK'
+EMAIL_HOST_PASSWORD = 'EMAIL_HOST_PASSWORD_OK'

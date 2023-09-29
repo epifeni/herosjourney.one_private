@@ -138,7 +138,8 @@
                             <div class="row ">
                                 <div class="col-md-4">
                                     <div class="profile-img">
-                                        <img src="{{user.avatar.url}}" alt=""/>
+                                        <img src="{% static user.avatar.url %}" alt=""/>
+                                        {% comment %} <img src="{user.avatar.url}}" alt=""/> {% endcomment %}
 
                                     </div>
 

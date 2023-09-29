@@ -1,8 +1,3 @@
-#Admin
-#=> admin
-#=> karachi12 (password)
-#=> mehfooz.connect@gmail.com (email)
-#New Windows codes
 
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin

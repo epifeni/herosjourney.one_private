@@ -936,7 +936,7 @@
           <div class="col-4 col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 grid-item filter{{ course.category }}" >
             <div class="gridarea__wraper">
               <div class="gridarea__img">                
-                <img src="{{course.thumbnail.url}}" alt="grid" />
+                <img src="{% static course.thumbnail.url %}" alt="grid" />
                 <div class="gridarea__small__button">
                   <div class="grid__badge">{{course.sub_category}}</div>
                 </div> 
