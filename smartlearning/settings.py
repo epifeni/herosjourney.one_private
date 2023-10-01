@@ -40,8 +40,9 @@ ALLOWED_HOSTS = ['*']
 
 CSRF_TRUSTED_ORIGINS = [
     'https://herosjourneyoneprivate-production.up.railway.app',
-    'https://herosjourney.one/',
-    'http://herosjourney.one/',
+    # 'http://www.herosjourney.one',
+    'https://www.herosjourney.one',
+    'https://herosjourney.one',
 ]
 
 SITE_ID = 1
