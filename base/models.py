@@ -38,7 +38,7 @@ class Course(models.Model):
     sub_category = models.CharField(max_length=255, choices=SUB_CATEGORY_CHOICES, default='', null=True, blank=True)
     thumbnail = models.ImageField(upload_to = "files/thumbnail") 
     date = models.DateTimeField(auto_now_add= True) 
-    resource = models.FileField(upload_to = "files/resource")
+    resource = models.FileField(upload_to = "files/resource", blank=True, null=True)
     length = models.IntegerField(null=False)
 
     instructor_name = models.CharField(max_length=50, null=True)
