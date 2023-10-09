@@ -80,26 +80,37 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)  # OneToOneField instead of ForeignKey
     course = models.ManyToManyField(Course ,  blank=True)
     date = models.DateTimeField(auto_now_add=True)
+
     credits = models.DecimalField(max_digits=8, decimal_places=2, default=0)
     free_credits = models.DecimalField(max_digits=8, decimal_places=2, default=18000)  # 5 hours in seconds
 
+
     def deduct_credits(self, duration):
-        if self.free_credits >= duration:
-            self.free_credits -= duration
+        # Deduct purchased credits first
+        if self.credits >= duration:
+            self.credits -= duration
         else:
-            remaining_duration = duration - self.free_credits
-            self.free_credits = 0
-            self.credits = max(0, self.credits - remaining_duration)
+            remaining_duration = duration - self.credits
+            self.credits = 0
+            # Deduct remaining duration from free credits
+            if self.free_credits >= remaining_duration:
+                self.free_credits -= remaining_duration
+            else:
+                self.free_credits = 0
 
         self.save()
 
     def start_of_month(self):
-        # Reset free_credits to 18000 (5 hours) at the start of the month
         now = datetime.now()
         start_of_month = now.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
-        if now == start_of_month:
-            self.free_credits = 18000
-            self.save()
+        
+        if now >= start_of_month:
+            # Check if it's the start of the month or a new month has started
+            if self.date.month != now.month:
+                # Reset free_credits to 18000 (5 hours) at the start of the new month
+                self.free_credits = 18000
+                self.date = now  # Update the last update date
+                self.save()
 
     def save(self, *args, **kwargs):
         # Call the start_of_month method before saving the object
@@ -113,13 +124,3 @@ class UserProfile(models.Model):
 
 
 
-# #Payment Code
-# class EnrollCourse(models.Model):
-#     order_id = models.CharField(max_length = 50 , null = False)
-#     user_course = models.ForeignKey(UserProfile , null = True , blank = True ,  on_delete=models.CASCADE)
-
-#     user = models.ForeignKey(User ,  on_delete=models.CASCADE)
-#     course = models.ForeignKey(Course , on_delete=models.CASCADE)
-
-#     date = models.DateTimeField(auto_now_add=True)
-#     status = models.BooleanField(default=False)
