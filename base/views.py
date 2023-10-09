@@ -87,8 +87,8 @@ def coursePage(request, slug):
                                 
         video = Video.objects.get(serial_number=serial_number, course=course)
 
-        remaining_free_credits = user_profile.free_credits
         credit_balance = user_profile.credits
+        remaining_free_credits = user_profile.free_credits
 
         return render(request, 'base/course_page.html', {'videos':videos,'course': course, 'video':video, 'remaining_free_credits': remaining_free_credits, 'credit_balance': credit_balance})
     else:
@@ -104,23 +104,25 @@ def deduct_credits(request):
         
         if request.user.is_authenticated:
             user_profile = UserProfile.objects.get(user=request.user)
-            remaining_free_credits = user_profile.free_credits - duration
+
+            # Deduct purchased credits first
+            remaining_credits = user_profile.credits - duration
             
-            if remaining_free_credits >= 0:
-                user_profile.free_credits = remaining_free_credits
+            if remaining_credits >= 0:
+                user_profile.credits = remaining_credits
             else:
-                remaining_duration = duration - user_profile.free_credits
-                user_profile.free_credits = 0
-                user_profile.credits = max(0, user_profile.credits - remaining_duration)
+                remaining_duration = duration - user_profile.credits
+                user_profile.credits = 0
+                user_profile.free_credits = max(0, user_profile.free_credits - remaining_duration)
             
             user_profile.save()
 
+            print('Remaining Purchased Credits:', user_profile.credits)
             print('Remaining Free Credits:', user_profile.free_credits)
-            print('Credit Balance:', user_profile.credits)
 
             return JsonResponse({
-                'remaining_free_credits': user_profile.free_credits,
                 'credit_balance': user_profile.credits,
+                'remaining_free_credits': user_profile.free_credits,
             })
 
         else:
@@ -132,6 +134,8 @@ def deduct_credits(request):
         return JsonResponse({
             'error': 'Invalid request method',
         }, status=405)
+
+
 
 
 
