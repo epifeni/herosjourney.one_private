@@ -137,7 +137,8 @@ def deduct_credits(request):
 
 
 
-
+def donateNow(request):
+    return render(request, 'base/donate.html')
 
 def aboutUs(request):
     return render(request, 'base/about.html')
