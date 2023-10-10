@@ -101,16 +101,21 @@ class UserProfile(models.Model):
         self.save()
 
     def start_of_month(self):
-        now = datetime.now()
-        start_of_month = now.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
-        
-        if now >= start_of_month:
-            # Check if it's the start of the month or a new month has started
-            if self.date.month != now.month:
-                # Reset free_credits to 18000 (5 hours) at the start of the new month
-                self.free_credits = 18000
-                self.date = now  # Update the last update date
-                self.save()
+        # Ensure that self.date is not None before accessing its attributes
+        if self.date is not None:
+            now = datetime.now()
+            start_of_month = now.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+            
+            if now >= start_of_month:
+                # Check if it's the start of the month or a new month has started
+                if self.date.month != now.month:
+                    # Reset free_credits to 18000 (5 hours) at the start of the new month
+                    self.free_credits = 18000
+                    self.date = now  # Update the last update date
+                    self.save()
+        else:
+            # Handle the case where self.date is None (e.g., not set during registration)
+            pass
 
     def save(self, *args, **kwargs):
         # Call the start_of_month method before saving the object
