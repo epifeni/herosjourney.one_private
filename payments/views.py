@@ -17,6 +17,7 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 def Checkout(request, pk):
    context={}
    course = Course.objects.get(id=pk)
+   print(course)
    context={ 'course': course }
    return render(request, 'base/checkout.html', context)
 
@@ -91,7 +92,9 @@ def charge(request):
 
            # Increase user Credit
            data_userprofile.credits = int(data_userprofile.credits) + (int(credit_quantity)*60*60)
+           print(data_userprofile.credits)
            data_userprofile.save()
+           
    return redirect(reverse('success', args=[amount]))
 
 

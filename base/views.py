@@ -114,7 +114,7 @@ def deduct_credits(request):
                 remaining_duration = duration - user_profile.credits
                 user_profile.credits = 0
                 user_profile.free_credits = max(0, user_profile.free_credits - remaining_duration)
-            
+
             user_profile.save()
 
             print('Remaining Purchased Credits:', user_profile.credits)
@@ -137,12 +137,53 @@ def deduct_credits(request):
 
 
 
-def donateNow(request):
-    return render(request, 'base/donate.html')
-
 def aboutUs(request):
     return render(request, 'base/about.html')
 
 def contactUs(request):
     return render(request, 'base/contact.html')
 
+def donateNow(request):
+    return render(request, 'base/donate.html')
+
+
+
+
+
+# @csrf_exempt
+# @login_required
+# def deduct_credits(request):
+#     if request.method == 'POST':
+#         duration = int(request.POST.get('duration'))
+#         print('Duration Played (in seconds):', duration)
+        
+#         if request.user.is_authenticated:
+#             user_profile = UserProfile.objects.get(user=request.user)
+#             remaining_free_credits = user_profile.free_credits - duration
+            
+#             if remaining_free_credits >= 0:
+#                 user_profile.free_credits = remaining_free_credits
+#             else:
+#                 remaining_duration = duration - user_profile.free_credits
+#                 user_profile.free_credits = 0
+#                 user_profile.credits = max(0, user_profile.credits - remaining_duration)
+            
+#             user_profile.save()
+
+#             print('Remaining Free Credits:', user_profile.free_credits)
+#             print('Credit Balance:', user_profile.credits)
+
+#             return JsonResponse({
+#                 'remaining_free_credits': user_profile.free_credits,
+#                 'credit_balance': user_profile.credits,
+#             })
+
+#         else:
+#             return JsonResponse({
+#                 'error': 'User is not authenticated',
+#             }, status=401)
+
+#     else:
+#         return JsonResponse({
+#             'error': 'Invalid request method',
+#         }, status=405)

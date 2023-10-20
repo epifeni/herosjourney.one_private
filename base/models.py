@@ -9,6 +9,7 @@ class Course(models.Model):
         ('engineering', 'Engineering'),
         ('web-development', 'Web Development'),
         ('architecture', 'Architecture'),
+        ('training', 'Training')
         # Add more choices as needed
     )
     SUB_CATEGORY_CHOICES = (
@@ -22,6 +23,8 @@ class Course(models.Model):
         ('reactjs', 'React JS'),
         ('front-end', 'Front-End'),
         ('back-end', 'Back-End'),
+        ('running', 'Running'),
+        ('gym', 'GYM'),
 
         # Add more choices as needed
     )
@@ -117,6 +120,7 @@ class UserProfile(models.Model):
             # Handle the case where self.date is None (e.g., not set during registration)
             pass
 
+
     def save(self, *args, **kwargs):
         # Call the start_of_month method before saving the object
         self.start_of_month()
@@ -124,7 +128,6 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return str(self.user)
-
 
 
 
