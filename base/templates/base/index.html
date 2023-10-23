@@ -115,11 +115,7 @@
                 src="{% static 'base/img/education/hp1-250x330.jpg' %}"
                 alt="education"
               />
-              <img
-                class="education__img__3"
-                src="{% static 'base/img/education/education__2.png' %}"
-                alt="education"
-              />
+              
               
             </div>
             
@@ -181,11 +177,7 @@
         <div class="col-xl-6 col-lg-6 col-md-12 col-12">
           <div class="aboutarea__img__inner text-center">
             <div class="aboutarea__img" data-tilt>
-              <img
-                class="aboutimg__1"
-                src="{% static 'base/img/about/about_8.png' %}"
-                alt="aboutimg"
-              />
+              
               <img
                 class="aboutimg__2"
                 src="{% static 'base/img/about/About 600x600.jpg' %}"
@@ -903,12 +895,12 @@
                 </div>
                 <div class="gridarea__bottom">
                   
-                    <div class="gridarea__small__img">
-                      <img src="{% static 'base/img/grid/grid_small_1.jpg' %}" alt="grid" />
-                      <div class="gridarea__small__content">
-                        <h6>{{course.instructor_name}}</h6>
-                      </div>
+                  <div class="gridarea__small__img">
+                    {% comment %} <img src="{% static 'base/img/grid/grid_small_1.jpg' %}" alt="grid" /> {% endcomment %}
+                    <div class="gridarea__small__content">
+                      <h6>Author: {{course.instructor_name}}</h6>
                     </div>
+                  </div>
                   
                 </div>
               </div>
