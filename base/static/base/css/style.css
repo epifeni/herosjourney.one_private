@@ -2699,8 +2699,17 @@ Education Area
     position: relative;
 }
 
+.aboutarea-about-us {
+    padding-top: 240px;
+    padding-bottom: 175px;
+    position: relative;
+}
+
 @media (min-width: 992px) and (max-width: 1365px) {
     .educationarea {
+        padding-top: 200px;
+    }
+    .aboutarea-about-us {
         padding-top: 200px;
     }
 }
@@ -2709,10 +2718,16 @@ Education Area
     .educationarea {
         padding-top: 50px;
     }
+    .aboutarea-about-us {
+        padding-top: 50px;
+    }
 }
 
 @media (max-width: 767px) {
     .educationarea {
+        padding-top: 50px;
+    }
+    .aboutarea-about-us {
         padding-top: 50px;
     }
 }
@@ -3188,7 +3203,7 @@ About Area
 
 @media (max-width: 767px) {
     .aboutarea__img__inner {
-        margin-top: 90px;
+        height: 300px;
     }
 }
 
@@ -3196,17 +3211,23 @@ About Area
     width: 100%;
 }
 
+.aboutarea__img__inner .aboutarea__img {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
 .aboutarea__img__inner .aboutarea__img .aboutimg__2 {
     position: absolute;
     left: 0;
-    margin: auto;
-    right: 0;
     top: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 @media (max-width: 767px) {
     .aboutarea__img__inner .aboutarea__img .aboutimg__2 {
-        top: -20%;
         width: 100%;
     }
 }
