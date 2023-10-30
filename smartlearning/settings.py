@@ -259,7 +259,7 @@ SOCIAL_AUTH_TWITTER_SECRET = config('SOCIAL_AUTH_TWITTER_SECRET')
 ########################################################
 ##################### STRIPE KEYS ######################
 ########################################################
-
+#ok
 STRIPE_SECRET_KEY = config('STRIPE_SECRET_KEY')
 STRIPE_PUBLIC_KEY = config('STRIPE_PUBLIC_KEY')
 
@@ -269,4 +269,6 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'EMAIL_HOST_USER_OK'
 EMAIL_HOST_PASSWORD = 'EMAIL_HOST_PASSWORD_OK'
+
+#This is stripe key.
 
