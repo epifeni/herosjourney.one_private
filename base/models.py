@@ -6,6 +6,8 @@ from django.dispatch import receiver
 import logging
 from django.utils import timezone
 from datetime import timedelta
+from dateutil.relativedelta import relativedelta
+
 
 
 class Course(models.Model):
@@ -87,9 +89,6 @@ class Video(models.Model):
 
 
 
-logger = logging.getLogger('base')
-
-
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     course = models.ManyToManyField(Course, blank=True)
@@ -108,31 +107,29 @@ class UserProfile(models.Model):
                 self.free_credits -= remaining_duration
             else:
                 self.free_credits = 0
-
         self.save()
 
 
     def start_of_month(self):
-        now = timezone.now()
-        start_of_month = now.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+        # Ensure that self.date is not None before accessing its attributes
+        if self.date is not None:
+            now = timezone.now()
+            start_of_month = now.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
 
-        if self.date is None or self.date.date() < start_of_month.date():
-            logger.info(f"Updating free_credits at the start of the month on {now}...")
-            self.free_credits = 18000
-            self.date = now
-            self.save()
+            if now >= start_of_month:
+                # Check if it's the start of the month or a new month has started
+                if self.date.month != now.month:
+                    # Reset free_credits to 18000 (5 hours) at the start of the new month
+                    self.free_credits = 18000
+                    self.date = now  # Update the last update date
+                    self.save()
         else:
-            # If self.date is None, update free_credits and set self.date
-            self.free_credits = 18000
-            self.date = now
-            self.save()
-
+            # Handle the case where self.date is None (e.g., not set during registration)
+            pass
 
 
     def save(self, *args, **kwargs):
-        is_new = self._state.adding
-        if is_new:
-            self.start_of_month()
+        self.start_of_month()
         super().save(*args, **kwargs)
 
     def __str__(self):
