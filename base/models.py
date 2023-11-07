@@ -108,10 +108,11 @@ class UserProfile(models.Model):
                 self.free_credits = 0
         self.save()
 
+
     def start_of_month(self):
         # Ensure that self.date is not None before accessing its attributes
-        now = timezone.now()
         if self.date is not None:
+            now = timezone.now()
             start_of_month = now.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
 
             if now >= start_of_month:
@@ -121,17 +122,9 @@ class UserProfile(models.Model):
                     self.free_credits = 18000
                     self.date = now  # Update the last update date
                     self.save()
-
-            elif self.date.date() != start_of_month.date():
-                # Reset free_credits to 18000 (5 hours) at the start of the month
-                self.free_credits = 18000
-                self.date = now  # Update the last update date
-                self.save()
         else:
-            # Reset free_credits to 18000 (5 hours) at the start of the month
-            self.free_credits = 18000
-            self.date = now  # Update the last update date
-            self.save()
+            # Handle the case where self.date is None (e.g., not set during registration)
+            pass
 
 
     def save(self, *args, **kwargs):
