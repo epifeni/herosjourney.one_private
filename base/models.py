@@ -6,7 +6,6 @@ from django.dispatch import receiver
 import logging
 from django.utils import timezone
 from datetime import timedelta
-from multitimer import MultiTimer  # Import MultiTimer
 # from .signals import monthly_update_credits
 
 
