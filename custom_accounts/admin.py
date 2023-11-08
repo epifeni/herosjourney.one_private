@@ -19,7 +19,7 @@ class UserAdmin(UserAdmin):
     fieldsets=()
     
 class UserProfileAdmin(admin.ModelAdmin):
-    list_display = ( 'user', 'credits', 'free_credits','date',)
+    list_display = ( 'user', 'credits', 'free_credits', 'date')
     list_display_links=('user','date',)
     ordering = ('user',)
     filter_horizontal = ()

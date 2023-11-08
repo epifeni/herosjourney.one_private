@@ -1,16 +1,16 @@
 from django.core.management.base import BaseCommand
-from base.models import UserProfile  # Replace 'yourapp' with your actual app name
+from base.signals import monthly_update_credits
+from base.models import UserProfile
 
 class Command(BaseCommand):
-    help = 'Update free credits at the start of each month'
+    help = 'Update user free credits on the start of each month'
 
     def handle(self, *args, **options):
-        profiles = UserProfile.objects.all()
-        for profile in profiles:
-            profile.start_of_month()
-            self.stdout.write(self.style.WARNING(f'Profile Updated: {profile}, Free Credits: {profile.free_credits}'))
-            profile.save()
-        self.stdout.write(self.style.SUCCESS('Free credits updated successfully.'))
+        monthly_update_credits.send(sender=None)
+        self.stdout.write(self.style.SUCCESS('Updating Free Credits ......................... !! '))
+        # Display information about user profiles
+        user_profiles = UserProfile.objects.all()
+        for user_profile in user_profiles:
+            self.stdout.write(f'User: {user_profile.user}, Free Credits: {user_profile.free_credits}')
 
-
-
+        self.stdout.write(self.style.SUCCESS('Successfully updated user credits for the start of the month.'))
