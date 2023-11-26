@@ -124,8 +124,15 @@ AUTH_USER_MODEL = 'custom_accounts.User'
 
 CRONJOBS = [
     # ('0 0 1 * *', 'base.models.send_monthly_update_credits'), #Every Each month of the start date
-    ('*/5 * * * *', 'base.models.send_monthly_update_credits') #Every 5 minutes.
+
+    # ('*/5 * * * *', 'base.models.send_monthly_update_credits') #Every 5 minutes.
+
+    ('* * * * *', 'base.models.send_monthly_update_credits') #Every minute.
+    
 ]
+
+
+
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases

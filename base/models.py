@@ -6,7 +6,7 @@ from django.dispatch import receiver
 import logging
 from django.utils import timezone
 from datetime import timedelta
-# from .signals import monthly_update_credits
+from .signals import monthly_update_credits
 
 
 
@@ -113,7 +113,8 @@ class UserProfile(models.Model):
 
     def start_of_month(self):
         now = timezone.now()
-        if self.date.month != now.month:
+        # if self.date.month != now.month: #For new Month
+        if self.date.minute != now.minute:  #For Every Minutes
             self.free_credits = 18000
             self.date = now
             self.save()
