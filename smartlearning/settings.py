@@ -124,7 +124,7 @@ AUTH_USER_MODEL = 'custom_accounts.User'
 
 CRONJOBS = [
     # ('0 0 1 * *', 'base.models.send_monthly_update_credits'), #Every Each month of the start date
-    ('0 * * * *', 'base.models.send_monthly_update_credits') #Every hour.
+    ('*/5 * * * *', 'base.models.send_monthly_update_credits') #Every 5 minutes.
 ]
 
 # Database
