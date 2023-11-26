@@ -114,8 +114,8 @@ class UserProfile(models.Model):
     def start_of_month(self):
         now = timezone.now()
         # if self.date.month != now.month: #For new Month
-        # if self.date.minute != now.minute:  #For Every Minutes
-        if (now - self.date).seconds // 60 % 5 == 0:  # For Every 5 Minutes
+        if self.date.minute != now.minute:  #For Every Minutes
+        # if (now - self.date).seconds // 60 % 5 == 0:  # For Every 5 Minutes
             self.free_credits = 18000
             self.date = now
             self.save()
