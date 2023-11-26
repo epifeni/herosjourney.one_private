@@ -57,6 +57,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'rest_framework',
+    'corsheaders',
+
+    #run this in a new enviroment if the current has been misplaced. 'python manage.py crontab add'
+    'django_crontab',
+
+
     # 'whitenoise.runserver_nostatic', 
 
     'custom_accounts', # custom_users_accounts app
@@ -64,6 +71,8 @@ INSTALLED_APPS = [
     'base', # main django app
     
     'social_django', # social-auth-app-django library
+
+    
 
     #'checkout', # stripe app
     
@@ -111,6 +120,11 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'smartlearning.wsgi.application'
 AUTH_USER_MODEL = 'custom_accounts.User'
+
+
+CRONJOBS = [
+    ('0 0 1 * *', 'base.models.send_monthly_update_credits')
+]
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases

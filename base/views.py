@@ -7,6 +7,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import get_user_model, authenticate, login, logout
 from custom_accounts.models import  User
 from base.models import  Course, Video, UserProfile
+
 from custom_accounts.forms import UserForm, MyUserCreationForm, EditProfileForm
 
 from django.http import JsonResponse
@@ -14,6 +15,8 @@ from django.urls import reverse
 from django.contrib.auth import get_user_model
 from django.db.models import Q
 from django.http import HttpResponseBadRequest
+from django.utils import timezone
+from datetime import timedelta
 
 
 #Views Function here
@@ -134,7 +137,6 @@ def deduct_credits(request):
         return JsonResponse({
             'error': 'Invalid request method',
         }, status=405)
-
 
 
 def aboutUs(request):

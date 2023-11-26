@@ -12,6 +12,7 @@ urlpatterns = [
     
     path('deduct-credits/', views.deduct_credits, name='deduct_credits'),
 
+
     path('enroll-course/<str:slug>/', views.EnrollCource, name='enroll'),
 
     path('courses/', views.courses, name='courses'),

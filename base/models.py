@@ -113,21 +113,25 @@ class UserProfile(models.Model):
 
     def start_of_month(self):
         now = timezone.now()
-        start_of_month = now.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
-
-        if self.date.date() != start_of_month.date():
+        if self.date.month != now.month:
             self.free_credits = 18000
-            self.date = start_of_month  # Set the date to the start of the current month
+            self.date = now
+            self.save()
         else:
             pass
 
     def save(self, *args, **kwargs):
         is_new = self._state.adding
+        super().save(*args, **kwargs)
         if is_new:
             self.start_of_month()
-        super().save(*args, **kwargs)
+            self.save()
 
     def __str__(self):
         return str(self.user)
+
+
+def send_monthly_update_credits():
+    monthly_update_credits.send(UserProfile)
 
 
