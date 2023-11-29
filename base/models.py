@@ -113,8 +113,8 @@ class UserProfile(models.Model):
 
     def start_of_month(self):
         now = timezone.now()
-        # if self.date.month != now.month:
-        if self.date.minute != now.minute:
+        if self.date.month != now.month:
+        # if self.date.minute != now.minute:
             self.free_credits = 18000
             self.date = now
             self.save()
