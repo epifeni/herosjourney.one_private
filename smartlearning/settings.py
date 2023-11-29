@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
 
+
     #run this in a new enviroment if the current has been misplaced. 'python manage.py crontab add'
     'django_crontab',
 

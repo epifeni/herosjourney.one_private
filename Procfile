@@ -1,1 +1,1 @@
-web: gunicorn 'smartlearning'.wsgi
+web: python manage.py start_app
