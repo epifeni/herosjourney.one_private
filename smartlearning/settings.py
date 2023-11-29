@@ -122,15 +122,15 @@ WSGI_APPLICATION = 'smartlearning.wsgi.application'
 AUTH_USER_MODEL = 'custom_accounts.User'
 
 
-"""CRONJOBS = [
-    ('0 0 1 * *', 'base.models.send_monthly_update_credits')
-]"""
-
 CRONJOBS = [
-
-('* * * * *', 'base.models.send_monthly_update_credits')
-
+    ('0 0 1 * *', 'base.models.send_monthly_update_credits')
 ]
+
+# CRONJOBS = [
+
+# ('* * * * *', 'base.models.send_monthly_update_credits')
+
+# ]
 
 
 # Database
