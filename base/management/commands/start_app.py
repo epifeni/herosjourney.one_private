@@ -18,19 +18,12 @@ class Command(BaseCommand):
         # Start the Gunicorn server in a new thread
         #Thread(target=os.system, args=('python manage.py runserver',)).start()
         Thread(target=os.system, args=('gunicorn smartlearning.wsgi',)).start()
-        try:
-            while True:
-                now = datetime.now()
-                # If current hour is 0 (12:00 AM)
-                if now.hour == 0:
-                    call_command('update_free_credits')
-                    time.sleep(3600)  # Sleep for an hour
-        except KeyboardInterrupt:
-            print("Stopping script...")
-
-        """while True:
+        
+        while True:
             call_command('update_free_credits')
-            time.sleep(120)"""
+            time.sleep(120)  # Sleep for an hour
+        
+
 
 
 #Two Minutes update
