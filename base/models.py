@@ -112,12 +112,15 @@ class UserProfile(models.Model):
 
 
     def start_of_month(self):
-        now = timezone.now()
-        if self.date.month != now.month:
-        # if self.date.minute != now.minute:
+        now = timezone.localtime(timezone.now())
+        local_date = timezone.localtime(self.date)
+        print(f"Before update - self.date: {local_date}, self.free_credits: {self.free_credits}")
+        if local_date.month != now.month:
             self.free_credits = 18000
             self.date = now
+            print(f"Immediately after update - self.date: {self.date}")
             self.save()
+            print(f"After update - self.date: {self.date}, self.free_credits: {self.free_credits}")
         else:
             pass
 
