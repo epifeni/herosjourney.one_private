@@ -168,7 +168,9 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Australia/Sydney'
+# TIME_ZONE = 'Australia/Sydney'
+
+TIME_ZONE = 'Pacific/Pago_Pago'
 
 # TIME_ZONE = 'Asia/Karachi'
 
