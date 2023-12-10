@@ -96,3 +96,6 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * Hat tip to anyone whose code was used
 * Inspiration
 * etc
+
+
+Link to your CONTRIBUTING file from your README, so more people see it. If you place the CONTRIBUTING file in your project’s repository, GitHub will automatically link to your file when a contributor creates an issue or opens a pull request.
