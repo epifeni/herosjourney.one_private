@@ -4,3 +4,6 @@ What does this project do?
 Why is this project useful?
 How do I get started?
 Where can I get more help, if I need it?
+
+
+You can use your README to answer other questions, like how you handle contributions, what the goals of the project are, and information about licenses and attribution. If you don’t want to accept contributions, or your project is not yet ready for production, write this information down.
